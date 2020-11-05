@@ -1,5 +1,15 @@
 from tkinter import *
 
+# Vaiables globales
+# Posiciones
+posts = 150
+postp = 150
+poses = 153
+posep = 153
+conteo=0
+conteop=0
+Rs = ['R3(Ω)', 'R4(Ω)', 'R5(Ω)', 'R6(Ω)', 'R7(Ω)']
+Rp = ['R3(Ω)', 'R4(Ω)', 'R5(Ω)', 'R6(Ω)', 'R7(Ω)']
 
 # -----------------------------------------Funciones----------------------------------------------------
 def botones():
@@ -57,7 +67,7 @@ def serie(condicion):
         lb.place(x=0, y=50)
 
         # Botones
-        bs1 = Button(frame2, text="+", width="5", height='5')
+        bs1 = Button(frame2, text="+", width="5", height='5', command=lambda: auxserie("+", frame2))
         bs1.config(font=('Bahnschrift', 10))
         bs1.pack()
         bs1.place(x=0, y=350)
@@ -66,9 +76,22 @@ def serie(condicion):
         bs2.pack()
         bs2.place(x=45, y=350)
 
-        # labels
-
         ventana2.mainloop()
+
+
+def auxserie(cond, frame2):
+    global posts, Rs, poses, conteo
+    if cond == '+' and conteo<5:
+        ts = Label(frame2, text=Rs[conteo])
+        ts.config(fg='white', bg='gray8', font=('Roman', 15))
+        ts.pack()
+        ts.place(x=350, y=posts)
+        es = Entry(frame2)
+        es.pack()
+        es.place(x=410, y=poses)
+        posts+=50
+        poses+=50
+        conteo+=1
 
 
 def paralelo(condicion):
@@ -97,7 +120,7 @@ def paralelo(condicion):
         lb.place(x=0, y=50)
 
         # Botones
-        bp1 = Button(frame3, text="+", width="5", height='5')
+        bp1 = Button(frame3, text="+", width="5", height='5', command=lambda: auxparalelo("+", frame3))
         bp1.config(font=('Bahnschrift', 10))
         bp1.pack()
         bp1.place(x=0, y=350)
@@ -125,6 +148,19 @@ def paralelo(condicion):
         ep2.place(x=410, y=103)
         ventana3.mainloop()
 
+def auxparalelo(condi, frame3):
+    global Rp, posep, postp, conteop
+    if condi == '+' and conteop<5:
+        ts = Label(frame3, text=Rp[conteop])
+        ts.config(fg='white', bg='gray8', font=('Roman', 15))
+        ts.pack()
+        ts.place(x=350, y=postp)
+        es = Entry(frame3)
+        es.pack()
+        es.place(x=410, y=posep)
+        postp+=50
+        posep+=50
+        conteop+=1
 
 # Creación de ventana principal
 ventana = Tk()
@@ -146,3 +182,5 @@ titulo.place(x=180, y=0)
 # Botones
 botones()
 ventana.mainloop()
+
+
