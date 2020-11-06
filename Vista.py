@@ -6,10 +6,13 @@ posts = 150
 postp = 150
 poses = 153
 posep = 153
-conteo=0
-conteop=0
+conteo = 0
+conteop = 0
 Rs = ['R3(Ω)', 'R4(Ω)', 'R5(Ω)', 'R6(Ω)', 'R7(Ω)']
 Rp = ['R3(Ω)', 'R4(Ω)', 'R5(Ω)', 'R6(Ω)', 'R7(Ω)']
+Is = ['Serie_1.gif', 'Serie_2.gif', 'Serie_3.gif', 'Serie_4.gif', 'Serie_5.gif']
+Ip = ['Paralelo_1.gif', 'Paralelo_2.gif', 'Paralelo_3.gif', 'Paralelo_4.gif', 'Paralelo_5.gif']
+
 
 # -----------------------------------------Funciones----------------------------------------------------
 def botones():
@@ -24,6 +27,8 @@ def botones():
 
 
 def serie(condicion):
+    global conteo, ventana2, lb
+
     if condicion == "serie":
         # Ventana hija
         ventana2 = Toplevel()
@@ -46,23 +51,23 @@ def serie(condicion):
         ts1 = Label(frame2, text='R1(Ω)')
         ts1.config(fg='white', bg='gray8', font=('Roman', 15))
         ts1.pack()
-        ts1.place(x=350, y=50)
+        ts1.place(x=450, y=50)
         es1 = Entry(frame2)
         es1.pack()
-        es1.place(x=410, y=53)
+        es1.place(x=550, y=53)
 
         # R2
         ts2 = Label(frame2, text='R2(Ω)')
         ts2.config(fg='white', bg='gray8', font=('Roman', 15))
         ts2.pack()
-        ts2.place(x=350, y=100)
+        ts2.place(x=450, y=100)
         es2 = Entry(frame2)
         es2.pack()
-        es2.place(x=410, y=103)
+        es2.place(x=550, y=103)
 
         # Imagen
-        cserie0 = PhotoImage(file='Serie_0.gif')
-        lb = Label(frame2, imag=cserie0)
+        cserie1 = PhotoImage(file='Serie_0.gif')
+        lb = Label(frame2, imag=cserie1)
         lb.pack()
         lb.place(x=0, y=50)
 
@@ -70,28 +75,41 @@ def serie(condicion):
         bs1 = Button(frame2, text="+", width="5", height='5', command=lambda: auxserie("+", frame2))
         bs1.config(font=('Bahnschrift', 10))
         bs1.pack()
-        bs1.place(x=0, y=350)
+        bs1.place(x=0, y=380)
         bs2 = Button(frame2, text="-", width="5", height='5')
         bs2.config(font=('Bahnschrift', 10))
         bs2.pack()
-        bs2.place(x=45, y=350)
+        bs2.place(x=45, y=380)
 
         ventana2.mainloop()
 
 
 def auxserie(cond, frame2):
-    global posts, Rs, poses, conteo
-    if cond == '+' and conteo<5:
+    global posts, Rs, poses, conteo, ventana2, Is, lb, ls, l1
+    if cond == '+' and conteo < 5:
+
         ts = Label(frame2, text=Rs[conteo])
         ts.config(fg='white', bg='gray8', font=('Roman', 15))
         ts.pack()
-        ts.place(x=350, y=posts)
+        ts.place(x=450, y=posts)
         es = Entry(frame2)
         es.pack()
-        es.place(x=410, y=poses)
-        posts+=50
-        poses+=50
-        conteo+=1
+        es.place(x=550, y=poses)
+
+        if conteo==0:
+            cserie0 = PhotoImage(file=Is[conteo])
+            cserie0.subsample(10,10)
+        else:
+            cserie0 = PhotoImage(file=Is[conteo])
+
+        l1 = Label(frame2, image=cserie0)
+        l1.pack()
+        l1.place(x=0, y=50)
+
+        posts += 50
+        poses += 50
+        conteo += 1
+        frame2.mainloop()
 
 
 def paralelo(condicion):
@@ -133,34 +151,42 @@ def paralelo(condicion):
         tp1 = Label(frame3, text='R1(Ω)')
         tp1.config(fg='white', bg='gray8', font=('Roman', 15))
         tp1.pack()
-        tp1.place(x=350, y=50)
+        tp1.place(x=390, y=50)
         ep1 = Entry(frame3)
         ep1.pack()
-        ep1.place(x=410, y=53)
+        ep1.place(x=450, y=53)
 
         # R2
         tp2 = Label(frame3, text='R2(Ω)')
         tp2.config(fg='white', bg='gray8', font=('Roman', 15))
         tp2.pack()
-        tp2.place(x=350, y=100)
+        tp2.place(x=390, y=100)
         ep2 = Entry(frame3)
         ep2.pack()
-        ep2.place(x=410, y=103)
+        ep2.place(x=450, y=103)
         ventana3.mainloop()
 
+
 def auxparalelo(condi, frame3):
-    global Rp, posep, postp, conteop
-    if condi == '+' and conteop<5:
+    global Rp, posep, postp, conteop, Ip
+    if condi == '+' and conteop < 5:
         ts = Label(frame3, text=Rp[conteop])
         ts.config(fg='white', bg='gray8', font=('Roman', 15))
         ts.pack()
-        ts.place(x=350, y=postp)
+        ts.place(x=390, y=postp)
         es = Entry(frame3)
         es.pack()
-        es.place(x=410, y=posep)
-        postp+=50
-        posep+=50
-        conteop+=1
+        es.place(x=450, y=posep)
+
+        cparalelo = PhotoImage(file=Ip[conteop])
+        l2 = Label(frame3, image=cparalelo)
+        l2.pack()
+        l2.place(x=0, y=50)
+        postp += 50
+        posep += 50
+        conteop += 1
+        frame3.mainloop()
+
 
 # Creación de ventana principal
 ventana = Tk()
@@ -179,8 +205,7 @@ titulo.config(fg='white', bg='gray8', font=('Roman', 20))
 titulo.pack()
 titulo.place(x=180, y=0)
 
+ls = [Label, Label, Label, Label]
 # Botones
 botones()
 ventana.mainloop()
-
-
