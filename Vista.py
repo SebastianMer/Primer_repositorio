@@ -47,7 +47,7 @@ def serie(condicion):
 
     op = StringVar()
     op2 = StringVar()
-
+    opv = StringVar()
     if condicion == "serie":
         # Ventana hija
         ventana2 = Toplevel()
@@ -84,6 +84,15 @@ def serie(condicion):
         es2.pack()
         es2.place(x=750, y=103)
 
+        # Volataje
+        tsv = Label(frame2, text='V1(V)')
+        tsv.config(fg='white', bg='gray8', font=('Roman', 15))
+        tsv.pack()
+        tsv.place(x=900, y=50)
+        esv = Entry(frame2, textvariable=opv)
+        esv.pack()
+        esv.place(x=950, y=53)
+
         # Imagen
         cserie1 = PhotoImage(file='Serie_0.gif')
         lbs = Label(frame2, imag=cserie1)
@@ -100,8 +109,7 @@ def serie(condicion):
         bs2.pack()
         bs2.place(x=30, y=410)
         bs3 = Button(frame2, text="Resolver", width="7", height='1',
-                     command=lambda: operacions(op.get(), op2.get(), ops[0].get(), ops[1].get(), ops[2].get(),
-                                                ops[3].get(), ops[4].get()))
+                     command=lambda: operacions(opv.get(), op.get(), op2.get(), ops, conteo))
         bs3.config(font=('Bahnschrift', 10))
         bs3.pack()
         bs3.place(x=60, y=410)
@@ -138,6 +146,7 @@ def paralelo(condicion):
     if condicion == "paralelo":
         ope = StringVar()
         ope2 = StringVar()
+        opev = StringVar()
         # Ventana hija 2
         ventana3 = Toplevel()
         ventana3.title("Circuito Paralelo")
@@ -179,6 +188,15 @@ def paralelo(condicion):
         ep2.pack()
         ep2.place(x=505, y=103)
 
+        # Voltaje
+        tpv = Label(frame3, text='V1(V)')
+        tpv.config(fg='white', bg='gray8', font=('Roman', 15))
+        tpv.pack()
+        tpv.place(x=850, y=50)
+        epv = Entry(frame3, textvariable=opev)
+        epv.pack()
+        epv.place(x=900, y=53)
+
         # Botones
         bp1 = Button(frame3, text="+", width="3", height='1', command=lambda: auxparalelo("+", frame3))
         bp1.config(font=('Bahnschrift', 10))
@@ -189,9 +207,7 @@ def paralelo(condicion):
         bp2.pack()
         bp2.place(x=30, y=405)
         bp3 = Button(frame3, text='Resolver', width='7', height='1',
-                     command=lambda: operacionp(ope.get(), ope2.get(), opp[0].get(),
-                                                opp[1].get(), opp[2].get(),
-                                                opp[3].get(), opp[4].get()))
+                     command=lambda: operacionp(opev.get(), ope.get(), ope2.get(), opp, conteop))
         bp3.config(font=('Bahnschrift', 10))
         bp3.pack()
         bp3.place(x=60, y=405)
