@@ -32,7 +32,7 @@ def operacions(voltaje, Res1, Res2, ops, conteo):
         conteo += 1
         impserie += 1
 
-
+    impserie = 3
 def operacionp(voltaje, Rep1, Rep2, opp, conteop):
     global auxip, imparalelo
 
@@ -47,3 +47,4 @@ def operacionp(voltaje, Rep1, Rep2, opp, conteop):
         print(str(imparalelo) + ": " + str(addp[conteop]))
         conteop += 1
         imparalelo += 1
+    imparalelo = 3

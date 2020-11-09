@@ -160,9 +160,6 @@ def menosseri(cod, frame2):
             lis[conteo].pack()
             lis[conteo].place(x=0, y=50)
 
-        if conteo < 0:
-            conteo = 0
-
         posts -= 50
         poses -= 50
         frame2.mainloop()
@@ -229,7 +226,7 @@ def paralelo(condicion):
         bp1.config(font=('Bahnschrift', 10))
         bp1.pack()
         bp1.place(x=0, y=405)
-        bp2 = Button(frame3, text="-", width="3", height='1')
+        bp2 = Button(frame3, text="-", width="3", height='1', command=lambda: menespar("menos", frame3))
         bp2.config(font=('Bahnschrift', 10))
         bp2.pack()
         bp2.place(x=30, y=405)
@@ -262,6 +259,30 @@ def auxparalelo(condi, frame3):
         postp += 50
         posep += 50
         conteop += 1
+        frame3.mainloop()
+
+
+def menespar(cond, frame3):
+    global Rp, posep, postp, conteop, Ip, lip, Pip, epar, opp
+
+    if cond == "menos" and conteop > 0:
+        conteop -= 1
+        lpar[conteop].destroy()
+        epar[conteop].destroy()
+
+        if conteop == 0:
+            Pip.insert(conteop, PhotoImage(file='Paralelo_0.GIF'))
+            lip.insert(conteop, Label(frame3, image=Pip[conteop]))
+            lip[conteop].pack()
+            lip[conteop].place(x=0, y=50)
+        else:
+            Pip.insert(conteop, PhotoImage(file=Ip[conteop - 1]))
+            lip.insert(conteop, Label(frame3, image=Pip[conteop]))
+            lip[conteop].pack()
+            lip[conteop].place(x=0, y=50)
+
+        postp -= 50
+        posep -= 50
         frame3.mainloop()
 
 
