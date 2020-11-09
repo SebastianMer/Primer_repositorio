@@ -104,7 +104,7 @@ def serie(condicion):
         bs1.config(font=('Bahnschrift', 10))
         bs1.pack()
         bs1.place(x=0, y=410)
-        bs2 = Button(frame2, text="-", width="3", height='1')
+        bs2 = Button(frame2, text="-", width="3", height='1', command=lambda: menosseri("menos", frame2))
         bs2.config(font=('Bahnschrift', 10))
         bs2.pack()
         bs2.place(x=30, y=410)
@@ -138,6 +138,33 @@ def auxserie(cond, frame2):
         posts += 50
         poses += 50
         conteo += 1
+        frame2.mainloop()
+
+
+def menosseri(cod, frame2):
+    global conteo, posts, Rs, poses, conteo, Is, lis, ops, lis, Pis
+
+    if cod == 'menos' and conteo > 0:
+        conteo -= 1
+        lser[conteo].destroy()
+        eser[conteo].destroy()
+
+        if conteo == 0:
+            Pis.insert(conteo, PhotoImage(file='Serie_0.GIF'))
+            lis.insert(conteo, Label(frame2, image=Pis[conteo]))
+            lis[conteo].pack()
+            lis[conteo].place(x=0, y=50)
+        else:
+            Pis.insert(conteo, PhotoImage(file=Is[conteo - 1]))
+            lis.insert(conteo, Label(frame2, image=Pis[conteo]))
+            lis[conteo].pack()
+            lis[conteo].place(x=0, y=50)
+
+        if conteo < 0:
+            conteo = 0
+
+        posts -= 50
+        poses -= 50
         frame2.mainloop()
 
 
