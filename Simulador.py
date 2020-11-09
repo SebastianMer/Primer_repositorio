@@ -12,10 +12,12 @@ auxi = 0
 add = []
 
 # Varibles auxiliares solucion Paralelo
-imparalelo = 3
+imparalelo = 2
 auxip = 0
 addp = []
-
+Ipar = []
+sumatotalpar = 0
+operapar = 0
 
 def operacions(voltaje, Res1, Res2, ops, conteo):
     global impserie, auxi
@@ -34,17 +36,26 @@ def operacions(voltaje, Res1, Res2, ops, conteo):
 
     impserie = 3
 def operacionp(voltaje, Rep1, Rep2, opp, conteop):
-    global auxip, imparalelo
+    global auxip, imparalelo, sumatotalpar, operapar
 
-    print("Voltaje " + str(voltaje))
-    print("1: " + str(Rep1))
-    print("2: " + str(Rep2))
     auxip = conteop
+    conteop = 0
+    sumatotalpar = int(Rep1) + int(Rep2)
+    while conteop < auxip:
+        addp.insert(conteop, opp[conteop].get())
+        conteop += 1
+
+
+    operapar = float(voltaje) / float(Rep1)
+    Ipar.insert(0, operapar)
+    operapar = float(voltaje) / float(Rep2)
+    Ipar.insert(1, operapar)
     conteop = 0
 
     while conteop < auxip:
-        addp.insert(conteop, opp[conteop].get())
-        print(str(imparalelo) + ": " + str(addp[conteop]))
+        operapar = float(voltaje) / float(addp[conteop])
+        Ipar.insert(imparalelo, operapar)
         conteop += 1
         imparalelo += 1
-    imparalelo = 3
+    print(str(Ipar))
+
