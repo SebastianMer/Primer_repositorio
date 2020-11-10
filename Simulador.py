@@ -1,3 +1,4 @@
+from tkinter import *
 """
 Simulador de circuitos resistivos
 Integrantes:
@@ -13,7 +14,12 @@ add = []
 Vser = []
 operser = 0
 sumares = 0
-
+Is = 0
+lbimptser = []
+lbimpvalueser = []
+Vimp = ['Voltaje(V) 1: ', 'Voltaje(V) 2: ', 'Voltaje(V) 3: ', 'Voltaje(V) 4: ',
+        'Voltaje(V) 5: ', 'Voltaje(V) 6: ', 'Voltaje(V) 7: ']
+posres = 100
 # Varibles auxiliares solucion Paralelo
 imparalelo = 2
 auxip = 0
@@ -22,7 +28,7 @@ Ipar = []
 operapar = 0
 
 def operacions(voltaje, Res1, Res2, ops, conteo):
-    global impserie, auxi, add, Vser, operser, sumares
+    global impserie, auxi, add, Vser, operser, sumares, lbimptser, posres, Vimp
 
     auxi = conteo
     conteo = 0
@@ -39,11 +45,66 @@ def operacions(voltaje, Res1, Res2, ops, conteo):
     Vser.insert(1, operser)
     conteo = 0
 
+    Is = float(voltaje) / sumares
     while conteo < auxi:
         operser = float(voltaje) * float(add[conteo]) / sumares
         Vser.insert(impserie, operser)
         conteo += 1
         impserie += 1
+
+    Resultado = Tk()
+    Resultado.title("Resultados circuito serie")
+    Resultado.geometry("700x700+0+0")
+    Resultado.config(bg='gray')
+
+    # Creación del frame
+    frame = Frame(Resultado, width="700", height='700')
+    frame.pack()
+    frame.config(bg='gray8')
+
+    # Titulo de la ventana
+    titulo = Label(frame, text='Resultados circuito serie')
+    titulo.config(fg='white', bg='gray8', font=('Roman', 20))
+    titulo.pack()
+    titulo.place(x=180, y=0)
+
+    # Impresion de resultados
+
+    auxi = impserie
+    impserie = 0
+    while impserie < auxi:
+        # Titulos
+        lbimptser.insert(impserie, Label(frame, text=Vimp[impserie]))
+        lbimptser[impserie].config(fg='white', bg='gray8', font=('Roman', 20))
+        lbimptser[impserie].pack()
+        lbimptser[impserie].place(x=180, y=posres)
+
+        #Valores
+        lbimpvalueser.insert(impserie, Label(frame, text=str(Vser[impserie])))
+        lbimpvalueser[impserie].config(fg='white', bg='gray8', font=('Roman', 20))
+        lbimpvalueser[impserie].pack()
+        lbimpvalueser[impserie].place(x=350, y=posres)
+
+        posres += 50
+        impserie += 1
+
+    #Corriente
+    lbc = Label(frame, text="Todas las resistencias poseen la misma corriente:")
+    lbc.config(fg='white', bg='gray8', font=('Roman', 20))
+    lbc.pack()
+    lbc.place(x=0, y=posres)
+
+    lc = Label(frame, text=str(Is))
+    lc.config(fg='white', bg='gray8', font=('Roman', 20))
+    lc.pack()
+    lc.place(x=350, y=posres+70)
+
+    l = Label(frame, text="Corriente(A)")
+    l.config(fg='white', bg='gray8', font=('Roman', 20))
+    l.pack()
+    l.place(x=180, y=posres+70)
+
+    Resultado.mainloop()
 
     print(str(Vser))
 
