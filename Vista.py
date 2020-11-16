@@ -35,28 +35,32 @@ def botones():
     b1 = Button(frame, text="Serie", width="15", height='5', command=lambda: serie("serie"))
     b1.config(font=('Bahnschrift', 10))
     b1.pack()
-    b1.place(x=290, y=200)
+    b1.place(x=620, y=200)
     b2 = Button(frame, text="Paralelo", width="15", height='5', command=lambda: paralelo("paralelo"))
     b2.config(font=('Bahnschrift', 10))
     b2.pack()
-    b2.place(x=290, y=400)
+    b2.place(x=620, y=400)
 
 
 def serie(condicion):
-    global conteo, ops
+    global conteo, ops, posts, poses
 
     op = StringVar()
     op2 = StringVar()
     opv = StringVar()
+    conteo = 0
+    posts = 150
+    poses = 153
+
     if condicion == "serie":
         # Ventana hija
         ventana2 = Toplevel()
         ventana2.title("Circuito Serie")
-        ventana2.geometry("1200x1200+0+0")
+        ventana2.geometry("1600x700+0+0")
         ventana2.config(bg='gray')
 
         # Creación del frame
-        frame2 = Frame(ventana2, width="1200", height='1200')
+        frame2 = Frame(ventana2, width="1600", height='700')
         frame2.pack()
         frame2.config(bg='gray8')
 
@@ -121,6 +125,7 @@ def auxserie(cond, frame2):
     global posts, Rs, poses, conteo, Is, lis, ops, lis, Pis
 
     if cond == '+' and conteo < 5:
+        # Variables, entry y labels
         ops.insert(conteo, StringVar())
         lser.insert(conteo, Label(frame2, text=Rs[conteo]))
         lser[conteo].config(fg='white', bg='gray8', font=('Roman', 15))
@@ -130,11 +135,13 @@ def auxserie(cond, frame2):
         eser[conteo].pack()
         eser[conteo].place(x=750, y=poses)
 
+        # Imagenes
         Pis.insert(conteo, PhotoImage(file=Is[conteo]))
         lis.insert(conteo, Label(frame2, image=Pis[conteo]))
         lis[conteo].pack()
         lis[conteo].place(x=0, y=50)
 
+        # Suma de variables
         posts += 50
         poses += 50
         conteo += 1
@@ -166,19 +173,26 @@ def menosseri(cod, frame2):
 
 
 def paralelo(condicion):
-    global opp, conteop
+    global opp, conteop, postp, posep
+
+    postp = 150
+    posep = 153
+    conteop = 0
+
     if condicion == "paralelo":
+        # Variables para capturar
         ope = StringVar()
         ope2 = StringVar()
         opev = StringVar()
+
         # Ventana hija 2
         ventana3 = Toplevel()
         ventana3.title("Circuito Paralelo")
-        ventana3.geometry("1200x1200+0+0")
+        ventana3.geometry("1600x700+0+0")
         ventana3.config(bg='gray')
 
         # Creación del frame
-        frame3 = Frame(ventana3, width="1200", height='1200')
+        frame3 = Frame(ventana3, width="1600", height='700')
         frame3.pack()
         frame3.config(bg='gray8')
 
@@ -243,6 +257,8 @@ def auxparalelo(condi, frame3):
     global Rp, posep, postp, conteop, Ip, lip, Pip, epar, opp
 
     if condi == '+' and conteop < 5:
+
+        # Variables de caputra, entry y labels
         opp.insert(conteop, StringVar())
         lpar.insert(conteop, Label(frame3, text=Rp[conteop]))
         lpar[conteop].config(fg='white', bg='gray8', font=('Roman', 15))
@@ -252,10 +268,13 @@ def auxparalelo(condi, frame3):
         epar[conteop].pack()
         epar[conteop].place(x=505, y=posep)
 
+        # Imagenes
         Pip.insert(conteop, PhotoImage(file=Ip[conteop]))
         lip.insert(conteop, Label(frame3, image=Pip[conteop]))
         lip[conteop].pack()
         lip[conteop].place(x=0, y=50)
+
+        # Sumar variables
         postp += 50
         posep += 50
         conteop += 1
@@ -289,11 +308,11 @@ def menespar(cond, frame3):
 # Creación de ventana principal
 ventana = Tk()
 ventana.title("Simulador circuitos resistivos")
-ventana.geometry("700x700+0+0")
+ventana.geometry("1600x700+0+0")
 ventana.config(bg='gray')
 
 # Creación del frame
-frame = Frame(ventana, width="700", height='700')
+frame = Frame(ventana, width="1600", height='700')
 frame.pack()
 frame.config(bg='gray8')
 
@@ -301,7 +320,7 @@ frame.config(bg='gray8')
 titulo = Label(frame, text='Simulador circuitos resistivos')
 titulo.config(fg='white', bg='gray8', font=('Roman', 20))
 titulo.pack()
-titulo.place(x=180, y=0)
+titulo.place(x=520, y=0)
 
 # Botones
 botones()
